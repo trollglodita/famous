@@ -5,6 +5,7 @@ define(function(require, exports, module) {
     var StateModifier = require('famous/modifiers/StateModifier');
 
     var PageView = require('views/PageView');
+    var Easing = require('famous/transitions/Easing');
 
     function AppView() {
         View.apply(this, arguments);
@@ -22,8 +23,8 @@ define(function(require, exports, module) {
     AppView.DEFAULT_OPTIONS = {
         openPosition: 276,
         transition: {
-            duration: 300,
-            curve: 'easeOut'
+            duration: 500,
+            curve: Easing.inOutBack
         }
     };
 
