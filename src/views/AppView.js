@@ -9,7 +9,10 @@ define(function(require, exports, module) {
     function AppView() {
         View.apply(this, arguments);
 
+         this.menuToggle = false;
+
          _createPageView.call(this);
+
          _setListeners.call(this);
     }
 
@@ -26,10 +29,31 @@ define(function(require, exports, module) {
     }
 
     function _setListeners() {
-        this.pageView.on('menuToggle', function(){
-            console.log('menu toggle!');
-        }.bind(this));
+        this.pageView.on('menuToggle', this.toggleMenu.bind(this));
     }
+
+    AppView.prototype.toggleMenu = function() {
+        if(this.menuToggle) {
+            this.slideLeft();
+        } else {
+            this.slideRight();
+        }
+        this.menuToggle = !this.menuToggle;
+    };
+
+    AppView.prototype.slideRight = function() {
+        this.pageModifier.setTransform(Transform.translate(276, 0, 0), {
+            duration: 300,
+            curve: 'easeOut'
+        });
+    };
+
+    AppView.prototype.slideLeft = function() {
+        this.pageModifier.setTransform(Transform.translate(0, 0, 0), {
+            duration: 300,
+            curve: 'easeOut'
+        });
+    };
 
     module.exports = AppView;
 });
